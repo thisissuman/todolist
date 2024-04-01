@@ -14,6 +14,21 @@ export const TodoWrapperLocalStorage = () => {
     setTodos(savedTodos);
   }, []);
 
+  const [data, setDate] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const values = await fetch("https://fakestoreapi.com/products/1");
+        const json = await values.json();
+        setDate(json);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
+  console.log(data);
+
   const addTodo = (todo) => {
     const newTodos = [
       ...todos,
