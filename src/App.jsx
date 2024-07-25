@@ -1,10 +1,10 @@
 import React from "react";
-import { TodoWrapperLocalStorage } from "./components/ToDoWrapper";
 import "./App.css";
+import PractTodowrapper from "./mypractisecomp/PractTodowrapper";
 function App() {
   return (
     <div className="App">
-      <TodoWrapperLocalStorage />
+      <PractTodowrapper />
     </div>
   );
 }

@@ -35,6 +35,11 @@ h1 {
   width: 100%;
   margin-bottom: 1rem;
 }
+.edited {
+  width: 100%;
+  border: 2px solid red;
+  margin-bottom: 1rem;
+}
 
 .todo-input {
   outline: none;

@@ -1,33 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { TodoForm } from "./ToDoForm";
 import { v4 as uuidv4 } from "uuid";
-
 import { EditTodoForm } from "./EditedList";
 import { TodoList } from "./ToDoList";
 uuidv4();
 
-export const TodoWrapperLocalStorage = () => {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
-    setTodos(savedTodos);
-  }, []);
-
-  const [data, setDate] = useState([]);
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const values = await fetch("https://fakestoreapi.com/products/1");
-        const json = await values.json();
-        setDate(json);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getData();
-  }, []);
-  console.log(data);
+export const TodoWrapper = () => {
+  const [todos, setTodos] = useState([
+    { id: uuidv4(), task: "", completed: false, isEditing: false },
+  ]);
 
   const addTodo = (todo) => {
     const newTodos = [
@@ -35,7 +16,6 @@ export const TodoWrapperLocalStorage = () => {
       { id: uuidv4(), task: todo, completed: false, isEditing: false },
     ];
     setTodos(newTodos);
-    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   const toggleComplete = (id) => {
@@ -43,13 +23,11 @@ export const TodoWrapperLocalStorage = () => {
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
     setTodos(newTodos);
-    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   const deleteTodo = (id) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
-    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   const editTodo = (id) => {
@@ -60,12 +38,11 @@ export const TodoWrapperLocalStorage = () => {
     );
   };
 
-  const editTask = (task, id) => {
+  const editTask = (newtask, id) => {
     const newTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
+      todo.id === id ? { ...todo, task: newtask, isEditing: !todo.isEditing } : todo
     );
     setTodos(newTodos);
-    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
   return (
     <div className="TodoWrapper">

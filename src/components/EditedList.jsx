@@ -10,7 +10,7 @@ export const EditTodoForm = ({ editTodo, task }) => {
     editTodo(value, task.id);
   };
   return (
-    <form onSubmit={handleSubmit} className="TodoForm">
+    <form onSubmit={handleSubmit} className="TodoForm edited">
       <input
         type="text"
         value={value}

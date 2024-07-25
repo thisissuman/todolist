@@ -4,6 +4,8 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export const TodoList = ({ task, deleteTodo, editTodo, toggleComplete }) => {
+  console.log(task.task);
+  if (task.task.length == 0) return;
   return (
     <div className="Todo">
       <p
